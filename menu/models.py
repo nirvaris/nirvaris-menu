@@ -6,7 +6,7 @@ from django.db import models
 class MenuItem(models.Model):
     name = models.CharField(max_length=70)
     url = models.CharField(max_length=255)
-    menu_parent = models.ForeignKey(MenuItem, null=True, blank=True, related_name='menu_children')
+    menu_parent = models.ForeignKey('MenuItem', null=True, blank=True, related_name='menu_children')
     is_hidden = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
