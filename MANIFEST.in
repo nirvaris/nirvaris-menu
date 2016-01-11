@@ -1,0 +1,7 @@
+include LICENSE
+include README.rst
+recursive-include menu/migrations *
+recursive-include menu/templates *
+recursive-include menu/static *
+recursive-include menu/templatetags *
+recursive-include docs *
