@@ -11,5 +11,5 @@ register = template.Library()
 def menu_tag():
     menu_items = MenuItem.objects.exclude(menu_parent__isnull=False)
 
-    pdb.set_trace()
+    #pdb.set_trace()
     return {'menu_items':menu_items}
