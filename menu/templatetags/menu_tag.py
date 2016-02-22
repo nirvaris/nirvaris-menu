@@ -1,4 +1,4 @@
-import pdb
+#import pdb
 
 from django import template
 from django.conf import settings
@@ -31,7 +31,7 @@ def menu_tag(context):
 def _menu_child(parent, user):
 
     menu_items = []
-    pdb.set_trace()
+    #pdb.set_trace()
     menu_parents = MenuItem.objects.filter(menu_parent__id=parent.id)
 
     for menu_parent in menu_parents:
