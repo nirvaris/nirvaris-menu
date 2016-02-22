@@ -10,7 +10,7 @@ register = template.Library()
 @register.inclusion_tag('tag-menu.html', takes_context=True)
 def menu_tag(context):
 
-    pdb.set_trace()
+    #pdb.set_trace()
     request = context['request']
     user = request.user
 
