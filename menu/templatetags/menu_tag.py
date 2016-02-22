@@ -9,17 +9,20 @@ register = template.Library()
 
 @register.inclusion_tag('tag-menu.html', takes_context=True)
 def menu_tag(context):
+
+    pdb.set_trace()
     request = context['request']
     user = request.user
 
     menu_items = []
 
-    menu_parents = MenuItem.objects.exclude(menu_parent__isnull=False, is_staff=user.is_staff, is_superuser=user.is_superuser)
+    menu_parents = MenuItem.objects.filter(menu_parent__isnull=True)
+
     for menu_parent in menu_parents:
         item = {}
         item['name'] = menu_parent.name
         item['url'] = menu_parent.url
-        item['menu_children'] = _menu_child(item, user)
+        item['menu_children'] = _menu_child(menu_parent, user)
         menu_items.append(item)
 
     #pdb.set_trace()
@@ -28,11 +31,14 @@ def menu_tag(context):
 def _menu_child(parent, user):
 
     menu_items = []
+    pdb.set_trace()
+    menu_parents = MenuItem.objects.filter(menu_parent__id=parent.id)
 
-    menu_parents = MenuItem.objects.exclude(menu_parent=parent, is_staff=user.is_staff, is_superuser=user.is_superuser)
     for menu_parent in menu_parents:
         item = {}
         item['name'] = menu_parent.name
         item['url'] = menu_parent.url
         item['menu_children'] = _menu_child(menu_parent, user)
         menu_items.append(item)
+
+    return menu_items
