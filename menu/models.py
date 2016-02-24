@@ -8,8 +8,10 @@ class MenuItem(models.Model):
     url = models.CharField(max_length=255)
     menu_parent = models.ForeignKey('MenuItem', null=True, blank=True, related_name='menu_children')
     is_hidden = models.BooleanField(default=False)
-    is_superuser = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+    is_authenticated = models.BooleanField(default=False)
+    is_anonymous = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
     def __str__(self):

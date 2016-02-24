@@ -2,6 +2,7 @@
 
 from django import template
 from django.conf import settings
+from django.db.models import Q
 
 from ..models import MenuItem
 
@@ -16,7 +17,10 @@ def menu_tag(context):
 
     menu_items = []
 
-    menu_parents = MenuItem.objects.filter(menu_parent__isnull=True)
+    q_obj = Q()
+    q_obj &= Q(is_superuser=user.is_superuser) | Q(is_staff=user.is_staff) | Q(is_authenticated=user.is_authenticated()) | ~Q(is_anonymous=user.is_authenticated())
+
+    menu_parents = MenuItem.objects.filter(menu_parent__isnull=True).filter(q_obj)
 
     for menu_parent in menu_parents:
         item = {}
