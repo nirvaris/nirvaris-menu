@@ -10,7 +10,7 @@
 				</ul>
 			</li>
 		{% else %}
-			<li class=""><a href="{{ menu_item.url }}">{{ menu_item.name }}</a></li>
+			<li class="{{ menu_item.css_class }}"><a href="{{ menu_item.url }}">{{ menu_item.name }}</a></li>
 		{% endif %}
 	{% endfor %}
 </ul>
