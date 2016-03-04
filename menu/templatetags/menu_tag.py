@@ -2,6 +2,7 @@
 
 from django import template
 from django.conf import settings
+from django.contrib.auth.models import AnonymousUser
 from django.db.models import Q
 
 from ..models import MenuItem
