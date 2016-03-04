@@ -26,6 +26,7 @@ def menu_tag(context):
         item = {}
         item['name'] = menu_parent.name
         item['url'] = menu_parent.url
+        item['css_class'] = menu_parent.css_class
         item['menu_children'] = _menu_child(menu_parent, user)
         menu_items.append(item)
 
@@ -42,6 +43,7 @@ def _menu_child(parent, user):
         item = {}
         item['name'] = menu_parent.name
         item['url'] = menu_parent.url
+        item['css_class'] = menu_parent.css_class
         item['menu_children'] = _menu_child(menu_parent, user)
         menu_items.append(item)
 
