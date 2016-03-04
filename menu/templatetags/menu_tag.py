@@ -2,7 +2,6 @@
 
 from django import template
 from django.conf import settings
-from django.contrib.auth.models import AnonymousUser
 from django.db.models import Q
 
 from ..models import MenuItem
@@ -13,11 +12,8 @@ register = template.Library()
 def menu_tag(context):
 
     #pdb.set_trace()
-    if 'request' in context:
-        request = context['request']
-        user = request.user
-    else:
-        user = AnonymousUser()
+    request = context['request']
+    user = request.user
 
     menu_items = []
 
