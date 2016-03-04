@@ -7,6 +7,7 @@ class MenuItem(models.Model):
     name = models.CharField(max_length=70)
     url = models.CharField(max_length=255)
     menu_parent = models.ForeignKey('MenuItem', null=True, blank=True, related_name='menu_children')
+    css_calss = models.CharField(max_length=255)
     is_hidden = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)

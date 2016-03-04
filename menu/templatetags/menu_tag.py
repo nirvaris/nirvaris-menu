@@ -12,8 +12,11 @@ register = template.Library()
 def menu_tag(context):
 
     #pdb.set_trace()
-    request = context['request']
-    user = request.user
+    if 'request' in constext:
+        request = context['request']
+        user = request.user
+    else:
+        user = AnonymousUser()
 
     menu_items = []
 
