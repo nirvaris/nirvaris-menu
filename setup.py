@@ -9,7 +9,7 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name='nirvaris-menu',
-    version='0.4.1',
+    version='0.4.2',
     packages=['menu'],
     include_package_data=True,
     license='MIT License',  # example license
