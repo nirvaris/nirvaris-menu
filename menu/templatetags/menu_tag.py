@@ -4,6 +4,7 @@ from django import template
 from django.conf import settings
 from django.db.models import Q
 
+from ..mixins import _check_groups
 from ..models import MenuItem, Resource
 
 register = template.Library()
@@ -78,9 +79,5 @@ def _menu_child(parent, user):
 
     return menu_items
 
-def _check_groups(menu, user):
-    for group in menu.groups.all():
-        if user.groups.filter(name=group.name).exists():
-            return True
-    return False
+
 
