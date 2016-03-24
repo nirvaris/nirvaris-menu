@@ -1,4 +1,6 @@
 from django.contrib.auth.models import User
+from django.contrib.auth.models import Group
+
 from django.db import models
 
 # Create your models here.
@@ -7,11 +9,12 @@ class MenuItem(models.Model):
 
     class Meta:
         ordering = ['display_order']
-        
+
     name = models.CharField(max_length=70)
     url = models.CharField(max_length=255)
     menu_parent = models.ForeignKey('MenuItem', null=True, blank=True, related_name='menu_children')
     css_class = models.CharField(max_length=255)
+    groups = models.ManyToManyField(Group)
     display_order = models.IntegerField()
     is_hidden = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=True)

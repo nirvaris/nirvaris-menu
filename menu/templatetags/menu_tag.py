@@ -24,7 +24,8 @@ def menu_tag(context):
         if (menu_parent.is_superuser & user.is_superuser) | \
             (menu_parent.is_staff & user.is_staff) | \
             (menu_parent.is_authenticated & user.is_authenticated()) | \
-            (menu_parent.is_anonymous):
+            (menu_parent.is_anonymous | \
+            _check_groups(menu_parent, user)):
 
             item = {}
             item['name'] = menu_parent.name
@@ -46,7 +47,8 @@ def _menu_child(parent, user):
         if (menu_parent.is_superuser & user.is_superuser) | \
             (menu_parent.is_staff & user.is_staff) | \
             (menu_parent.is_authenticated & user.is_authenticated()) | \
-            (menu_parent.is_anonymous):
+            (menu_parent.is_anonymous | \
+            _check_groups(menu_parent, user)):
 
             item = {}
             item['name'] = menu_parent.name
@@ -56,3 +58,10 @@ def _menu_child(parent, user):
             menu_items.append(item)
 
     return menu_items
+
+def _check_groups(menu, user):
+    for group in menu.groups.all():
+        if user.groups.filter(name=group.name).exists():
+            return True
+    return False
+
