@@ -8,6 +8,21 @@ from ..models import MenuItem
 
 register = template.Library()
 
+@register.filter
+def has_permission(resource, user):
+    #pdb.set_trace()
+
+    resource = Resource.objects.get(name=resource)
+    if (resource.is_superuser & user.is_superuser) | \
+        (resource.is_staff & user.is_staff) | \
+        (resource.is_authenticated & user.is_authenticated()) | \
+        (resource.is_anonymous | \
+        _check_groups(resource, user)):
+
+        return True
+
+    return False
+    
 @register.inclusion_tag('tag-menu.html', takes_context=True)
 def menu_tag(context):
 
