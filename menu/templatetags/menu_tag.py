@@ -4,7 +4,7 @@ from django import template
 from django.conf import settings
 from django.db.models import Q
 
-from ..models import MenuItem
+from ..models import MenuItem, Resource
 
 register = template.Library()
 
@@ -12,7 +12,11 @@ register = template.Library()
 def has_permission(resource, user):
     #pdb.set_trace()
 
+    if not Resource.objects.filter(name=resource).exists():
+        return False
+
     resource = Resource.objects.get(name=resource)
+
     if (resource.is_superuser & user.is_superuser) | \
         (resource.is_staff & user.is_staff) | \
         (resource.is_authenticated & user.is_authenticated()) | \
@@ -22,7 +26,7 @@ def has_permission(resource, user):
         return True
 
     return False
-    
+
 @register.inclusion_tag('tag-menu.html', takes_context=True)
 def menu_tag(context):
 
