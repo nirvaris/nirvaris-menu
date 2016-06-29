@@ -14,7 +14,7 @@ class MenuItem(models.Model):
     url = models.CharField(max_length=255)
     menu_parent = models.ForeignKey('MenuItem', null=True, blank=True, related_name='menu_children')
     css_class = models.CharField(max_length=255)
-    groups = models.ManyToManyField(Group)
+    groups = models.ManyToManyField(Group, blank=True)
     display_order = models.IntegerField()
     is_hidden = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=True)
