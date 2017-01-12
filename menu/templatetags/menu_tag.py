@@ -28,12 +28,12 @@ def has_permission(resource, user):
 
     return False
 
-@register.inclusion_tag('tag-menu.html', takes_context=True)
-def menu_tag(context):
+@register.inclusion_tag('tag-menu.html')
+def menu_tag(user):
 
-    #pdb.set_trace()
-    request = context['request']
-    user = request.user
+    pdb.set_trace()
+    #request = context['request']
+    #user = request.user
 
     menu_items = []
 
@@ -78,6 +78,3 @@ def _menu_child(parent, user):
             menu_items.append(item)
 
     return menu_items
-
-
-
