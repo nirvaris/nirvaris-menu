@@ -31,7 +31,7 @@ def has_permission(resource, user):
 @register.inclusion_tag('tag-menu.html')
 def menu_tag(user):
 
-    pdb.set_trace()
+    #pdb.set_trace()
     #request = context['request']
     #user = request.user
 
