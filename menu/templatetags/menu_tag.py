@@ -2,8 +2,8 @@ import pdb
 
 from django import template
 from django.conf import settings
+from django.contrib.auth.models import AnonymousUser
 from django.db.models import Q
-
 from ..mixins import _check_groups
 from ..models import MenuItem, Resource
 
@@ -34,6 +34,8 @@ def menu_tag(user):
     #pdb.set_trace()
     #request = context['request']
     #user = request.user
+    if user == '':
+        user = AnonymousUser()
 
     menu_items = []
 
