@@ -53,6 +53,7 @@ def menu_tag(user):
             item['name'] = menu_parent.name
             item['url'] = menu_parent.url
             item['css_class'] = menu_parent.css_class
+            item['is_hidden'] = menu_parent.is_hidden
             item['menu_children'] = _menu_child(menu_parent, user)
             menu_items.append(item)
 
@@ -76,6 +77,7 @@ def _menu_child(parent, user):
             item['name'] = menu_parent.name
             item['url'] = menu_parent.url
             item['css_class'] = menu_parent.css_class
+            item['is_hidden'] = menu_parent.is_hidden
             item['menu_children'] = _menu_child(menu_parent, user)
             menu_items.append(item)
 
