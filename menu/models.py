@@ -29,10 +29,6 @@ class MenuItem(models.Model):
     def __str__(self):
         return self.name
 
-    @property
-    def url_resolved(self):
-        return reverse(self.url)
-
 class Resource(models.Model):
 
     name = models.CharField(max_length=70, unique=True)
