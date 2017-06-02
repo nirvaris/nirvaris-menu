@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.contrib.auth.models import Group
-
 from django.db import models
+from django.urls import reverse
 
 # Create your models here.
 
@@ -23,8 +23,12 @@ class MenuItem(models.Model):
     is_anonymous = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
+
     def __str__(self):
         return self.name
+        
+    def url_resolved(self):
+        return reverse(self.url)
 
 class Resource(models.Model):
 
