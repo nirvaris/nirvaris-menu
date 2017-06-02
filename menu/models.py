@@ -29,6 +29,7 @@ class MenuItem(models.Model):
     def __str__(self):
         return self.name
 
+    @property
     def url_resolved(self):
         return reverse(self.url)
 
