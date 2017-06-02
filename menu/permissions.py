@@ -1,6 +1,8 @@
 
 from .models import Resource
 
+from .mixins import _check_groups
+
 def has_permission(resource, user):
     #pdb.set_trace()
 
