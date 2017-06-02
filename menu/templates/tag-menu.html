@@ -5,12 +5,12 @@
 				<a href="{{ menu_item.url }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ menu_item.name }} <span class="caret"></span></a>
 				<ul class="dropdown-menu">
 					{% for sub_menu_item in menu_item.menu_children %}
-					<li class="{{ sub_menu_item.css_class }}"><a href="{{ sub_menu_item.url }}">{{ sub_menu_item.name }}</a></li>
+					<li class="{{ sub_menu_item.css_class }}"><a href="{{ sub_menu_item.url_resolved }}">{{ sub_menu_item.name }}</a></li>
 					{% endfor %}
 				</ul>
 			</li>
 		{% else %}
-			<li class="{{ menu_item.css_class }}"><a href="{{ menu_item.url }}">{{ menu_item.name }}</a></li>
+			<li class="{{ menu_item.css_class }}"><a href="{{ menu_item.url_resolved }}">{{ menu_item.name }}</a></li>
 		{% endif %}
 	{% endfor %}
 </ul>
