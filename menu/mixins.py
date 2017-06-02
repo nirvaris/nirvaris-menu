@@ -22,7 +22,8 @@ class MenuPermissionsMixin(object):
         path_info = self.request.path_info
         lg = get_language_from_path(path_info)
 
-        view_url = path_info.replace('/'+lg,'')
+        #view_url = path_info.replace('/'+lg,'')
+        view_url = path_info.split('/')[-1]
         if view_url:
             if not MenuItem.objects.filter(url=view_url).exists():
                 raise PermissionDenied
