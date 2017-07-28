@@ -29,6 +29,7 @@ class MenuPermissionsMixin(object):
                 raise PermissionDenied
 
             menu_item = MenuItem.objects.filter(url=view_url)[0]
+            request.session['menu_item'] = menu_item.name
 
             if (menu_item.is_superuser & user.is_superuser) | \
                 (menu_item.is_staff & user.is_staff) | \

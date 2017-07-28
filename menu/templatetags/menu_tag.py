@@ -29,7 +29,7 @@ def has_permission(resource, user):
     return False
 
 @register.inclusion_tag('tag-menu.html')
-def menu_tag(user):
+def menu_tag(user, clicked_menu=None):
 
     #pdb.set_trace()
     #request = context['request']
@@ -53,14 +53,18 @@ def menu_tag(user):
             item['name'] = menu_parent.name
             item['url'] = menu_parent.url
             item['css_class'] = menu_parent.css_class
+            #pdb.set_trace()
+            if menu_parent.menu_children.filter(name=clicked_menu).exists() or menu_parent.name==clicked_menu:
+                    item['css_class'] = menu_parent.css_class + ' open'
+
             item['is_hidden'] = menu_parent.is_hidden
-            item['menu_children'] = _menu_child(menu_parent, user)
+            item['menu_children'] = _menu_child(menu_parent, user, clicked_menu)
             menu_items.append(item)
 
     #pdb.set_trace()
     return {'menu_items':menu_items}
 
-def _menu_child(parent, user):
+def _menu_child(parent, user, clicked_menu=None):
 
     menu_items = []
 
@@ -77,6 +81,10 @@ def _menu_child(parent, user):
             item['name'] = menu_parent.name
             item['url'] = menu_parent.url
             item['css_class'] = menu_parent.css_class
+
+            if menu_parent.menu_children.filter(name=clicked_menu).exists() or menu_parent.name==clicked_menu:
+                    item['css_class'] = menu_parent.css_class + ' open'
+
             item['is_hidden'] = menu_parent.is_hidden
             item['menu_children'] = _menu_child(menu_parent, user)
             menu_items.append(item)
