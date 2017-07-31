@@ -54,8 +54,8 @@ def menu_tag(user, clicked_menu=None):
             item['url'] = menu_parent.url
             item['css_class'] = menu_parent.css_class
             #pdb.set_trace()
-            if menu_parent.menu_children.filter(name=clicked_menu).exists() or menu_parent.name==clicked_menu:
-                    item['css_class'] = menu_parent.css_class + ' open'
+            if menu_parent.menu_children.filter(name=clicked_menu).exists():
+                    item['css_class'] = menu_parent.css_class + ' open active'
 
             item['is_hidden'] = menu_parent.is_hidden
             item['menu_children'] = _menu_child(menu_parent, user, clicked_menu)
@@ -82,7 +82,7 @@ def _menu_child(parent, user, clicked_menu=None):
             item['url'] = menu_parent.url
             item['css_class'] = menu_parent.css_class
 
-            if menu_parent.menu_children.filter(name=clicked_menu).exists() or menu_parent.name==clicked_menu:
+            if menu_parent.name==clicked_menu:
                     item['css_class'] = menu_parent.css_class + ' open'
 
             item['is_hidden'] = menu_parent.is_hidden
