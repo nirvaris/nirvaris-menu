@@ -20,3 +20,11 @@ def has_permission(resource, user):
         return True
 
     return False
+
+def is_admin(user):
+
+    for group in user.groups.all():
+        if group.is_admin.it_is:
+            return True
+
+    return False

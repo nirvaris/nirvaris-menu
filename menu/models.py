@@ -7,6 +7,10 @@ from django.urls import reverse
 
 # Create your models here.
 
+class IsAdmin(models.Model):
+    group = models.OneToOneField(Group,related_name='is_admin')
+    it_is = models.BooleanField()
+
 class MenuItem(models.Model):
 
     class Meta:
