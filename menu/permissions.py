@@ -25,7 +25,7 @@ def is_admin(user):
 
     for group in user.groups.all():
 
-        if group.is_admin:
+        if hasattr(group, 'is_admin'):
             if group.is_admin.it_is:
                 return True
 
