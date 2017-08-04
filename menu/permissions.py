@@ -25,7 +25,8 @@ def is_admin(user):
 
     for group in user.groups.all():
 
-        if group.is_admin and group.is_admin.it_is:
-            return True
+        if group.is_admin:
+            if group.is_admin.it_is:
+                return True
 
     return False
