@@ -1,21 +1,16 @@
 
 from .models import Resource
 
-from .mixins import _check_groups
-
-def has_permission(resource, user):
+def check_permission(resource, user):
     #pdb.set_trace()
 
-    if not Resource.objects.filter(name=resource).exists():
-        return False
+    if user.is_superuser:
+        return True
 
-    resource = Resource.objects.get(name=resource)
-
-    if (resource.is_superuser & user.is_superuser) | \
-        (resource.is_staff & user.is_staff) | \
+    if (resource.is_staff & user.is_staff) | \
         (resource.is_authenticated & user.is_authenticated()) | \
         (resource.is_anonymous | \
-        _check_groups(resource, user)):
+        check_groups(resource, user)):
 
         return True
 
@@ -28,5 +23,10 @@ def is_admin(user):
         if hasattr(group, 'is_admin'):
             if group.is_admin.it_is:
                 return True
+    return False
 
+def check_groups(resource, user):
+    for group in resource.groups.all():
+        if user.groups.filter(name=group.name).exists():
+            return True
     return False
