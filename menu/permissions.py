@@ -1,11 +1,24 @@
 
-from .models import Resource
+from .models import Resource, MenuItem
 
 def check_permission(resource, user):
     #pdb.set_trace()
 
     if user.is_superuser:
         return True
+
+    if not resource:
+        return False
+
+    if isinstance(resource, str):
+        if Resource.object.filter(name=resource).exists():
+            resource = Resource.object.get(name=resource)
+
+        if MenuItem.object.filter(name=resource).exists():
+            resource = MenuItem.object.get(name=resource)
+
+    if not (isinstance(resource, Resource) or isinstance(resource, MenuItem)):
+        return False
 
     if (resource.is_staff & user.is_staff) | \
         (resource.is_authenticated & user.is_authenticated()) | \
