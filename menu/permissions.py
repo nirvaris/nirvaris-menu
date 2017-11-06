@@ -11,11 +11,11 @@ def check_permission(resource, user):
         return False
 
     if isinstance(resource, str):
-        if Resource.object.filter(name=resource).exists():
-            resource = Resource.object.get(name=resource)
+        if Resource.objects.filter(name=resource).exists():
+            resource = Resource.objects.get(name=resource)
 
-        if MenuItem.object.filter(name=resource).exists():
-            resource = MenuItem.object.get(name=resource)
+        if MenuItem.objects.filter(name=resource).exists():
+            resource = MenuItem.objects.get(name=resource)
 
     if not (isinstance(resource, Resource) or isinstance(resource, MenuItem)):
         return False
