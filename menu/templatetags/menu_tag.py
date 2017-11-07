@@ -21,7 +21,7 @@ def has_permission(resource, user):
 
 
 @register.inclusion_tag('tag-menu.html')
-def menu_tag(user, clicked_menu=None):
+def menu_tag(user='', clicked_menu=None):
 
     #pdb.set_trace()
     #request = context['request']
