@@ -11,8 +11,6 @@ register = template.Library()
 
 @register.filter
 def has_permission(resource, user):
-    #pdb.set_trace()
-
     if not Resource.objects.filter(name=resource).exists():
         return True
 
@@ -22,10 +20,6 @@ def has_permission(resource, user):
 
 @register.inclusion_tag('tag-menu.html')
 def menu_tag(user='', clicked_menu=None):
-
-    #pdb.set_trace()
-    #request = context['request']
-    #user = request.user
     if user == '':
         user = AnonymousUser()
 
@@ -42,7 +36,7 @@ def menu_tag(user='', clicked_menu=None):
             item['name'] = menu_parent.name
             item['url'] = menu_parent.url
             item['css_class'] = menu_parent.css_class
-            #pdb.set_trace()
+
             if menu_parent.menu_children.filter(name=clicked_menu).exists():
                     item['is_open'] = True
 
@@ -50,13 +44,11 @@ def menu_tag(user='', clicked_menu=None):
             item['menu_children'] = _menu_child(menu_parent, user, clicked_menu)
             menu_items.append(item)
 
-    #pdb.set_trace()
     return {'menu_items':menu_items}
 
 def _menu_child(parent, user, clicked_menu=None):
-
     menu_items = []
-
+    
     menu_parents = MenuItem.objects.filter(menu_parent__id=parent.id)
 
     for menu_parent in menu_parents:
@@ -75,3 +67,9 @@ def _menu_child(parent, user, clicked_menu=None):
             menu_items.append(item)
 
     return menu_items
+
+@register.filter('is_external_url')
+def is_external_url(text):
+    if 'http' in text:
+        return True
+    return False
