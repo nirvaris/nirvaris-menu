@@ -8,7 +8,7 @@ from django.urls import reverse
 # Create your models here.
 
 class IsAdmin(models.Model):
-    group = models.OneToOneField(Group,related_name='is_admin')
+    group = models.OneToOneField(Group,related_name='is_admin', on_delete=models.CASCADE)
     it_is = models.BooleanField()
 
 class MenuItem(models.Model):
@@ -18,7 +18,7 @@ class MenuItem(models.Model):
 
     name = models.CharField(max_length=70)
     url = models.CharField(max_length=255)
-    menu_parent = models.ForeignKey('MenuItem', null=True, blank=True, related_name='menu_children')
+    menu_parent = models.ForeignKey('MenuItem', null=True, blank=True, related_name='menu_children', on_delete=models.CASCADE)
     css_class = models.CharField(max_length=255)
     groups = models.ManyToManyField(Group, blank=True)
     display_order = models.IntegerField()

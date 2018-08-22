@@ -3,7 +3,7 @@ import pdb
 
 
 from django.core.exceptions import PermissionDenied
-from django.core.urlresolvers import reverse, resolve
+from django.urls import reverse, resolve
 from django.utils.translation import get_language_from_path
 
 from .permissions import check_permission
