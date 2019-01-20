@@ -21,7 +21,7 @@ def check_permission(resource, user):
         return False
 
     if (resource.is_staff & user.is_staff) | \
-        (resource.is_authenticated & user.is_authenticated()) | \
+        (resource.is_authenticated & user.is_authenticated) | \
         (resource.is_anonymous | \
         check_groups(resource, user)):
 
